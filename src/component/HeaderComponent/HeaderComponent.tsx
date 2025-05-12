@@ -1,10 +1,10 @@
-import React from 'react'
+import { StyledContainer } from './style'
 
 const HeaderComponent = () => {
   return (
-    <div>
-      logo
-    </div>
+    <StyledContainer>
+      <p>easy running</p>
+    </StyledContainer>
   )
 }
 

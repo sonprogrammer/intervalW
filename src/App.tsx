@@ -3,7 +3,7 @@ import LayoutPage from "./page/LayoutPage/LayoutPage"
 function App() {
 
   return (
-    <div className="bg-blue-400">
+    <div className="">
      <LayoutPage />
     </div>
   )
