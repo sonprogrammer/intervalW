@@ -1,11 +1,13 @@
-import React from 'react'
+import { StyledContainer, StyledMenus } from "./style"
+
 
 const FooterComponent = () => {
   return (
-    <div className='flex'>
-        <p>record</p>
-        <p>setting</p>
-    </div>
+    <StyledContainer>
+        <StyledMenus>record</StyledMenus>
+        <StyledMenus>setting</StyledMenus>
+        
+    </StyledContainer>
   )
 }
 
