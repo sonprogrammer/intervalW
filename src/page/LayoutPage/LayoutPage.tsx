@@ -9,7 +9,7 @@ const LayoutPage = () => {
   return (
     <StyledContainer>
 
-      <StyledHeader>
+      <StyledHeader> 
         <HeaderComponent />
       </StyledHeader>
       

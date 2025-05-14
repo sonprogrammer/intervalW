@@ -1,19 +1,21 @@
-import { StyledBox, StyledContainer, StyledStart } from "./style"
+import { StyledContainer, StyledType } from "./style"
 
 
 const MainBtnComponent = () => {
   return (
-    <StyledContainer >
-        <StyledBox>
+    <StyledContainer>
 
-        <div>
+        <StyledType isleft >
             <p>웨이트</p>    
-        </div>
-        <div>
+        </StyledType>
+        
+        <StyledType >
             <p>유산소</p>    
-        </div>
-        <StyledStart>Start</StyledStart>
-        </StyledBox>
+        </StyledType>
+        
+        {/* <StyledStart>Start</StyledStart> */}
+
+        
     </StyledContainer>
   )
 }

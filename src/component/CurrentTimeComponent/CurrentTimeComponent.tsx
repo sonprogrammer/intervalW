@@ -1,10 +1,11 @@
+import { StyledContainer } from "./style"
 
 
 const CurrentTimeComponent = () => {
   return (
-    <div>
-        수행시간 00 : 00 : 00 
-    </div>
+    <StyledContainer>
+        총 수행시간 00 : 00 : 00 
+    </StyledContainer>
   )
 }
 

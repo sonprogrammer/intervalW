@@ -1,9 +1,12 @@
+import { Link } from 'react-router-dom'
 import { StyledContainer } from './style'
 
 const HeaderComponent = () => {
   return (
     <StyledContainer>
-      <p>easy running</p>
+      <Link to='/'>
+        <p>easy running</p>
+      </Link>
     </StyledContainer>
   )
 }

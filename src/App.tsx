@@ -1,6 +1,8 @@
 import { Route, Routes } from "react-router-dom"
-import LayoutPage from "./page/LayoutPage/LayoutPage"
-import MainPage from "./page/MainPage/MainPage"
+
+import { LayoutPage, RecordPage, MainPage, SettingPage } from "./page"
+
+
 
 function App() {
 
@@ -8,6 +10,8 @@ function App() {
     <Routes>
       <Route element={<LayoutPage />}>
         <Route path="/" element={<MainPage />} />
+        <Route path="/record" element={<RecordPage />} />
+        <Route path="/setting" element={<SettingPage />} />
       </Route>
     </Routes>
   )

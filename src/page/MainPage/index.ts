@@ -1,1 +1,1 @@
-// export { default as LayoutPage} from ''
+export { default as MainPage} from './MainPage'
