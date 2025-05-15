@@ -16,6 +16,13 @@ export const StyledContainer = styled.div`
 
 export const StyledBox = styled.div`
     ${tw`
-        
+        bg-blue-100
+        flex
+        flex-col
+        text-center
+        items-center
+        p-5
+        rounded-lg
+        w-[50%]
     `}
 `
