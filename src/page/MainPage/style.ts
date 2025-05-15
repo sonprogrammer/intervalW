@@ -29,5 +29,6 @@ export const StyledBtn = styled.div`
         text-decoration: underline;
         cursor: pointer;
         font-weight: bold;
+        color: orange;
     }
 `

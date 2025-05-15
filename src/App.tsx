@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom"
 
-import { LayoutPage, RecordPage, MainPage, SettingPage } from "./page"
+import { LayoutPage, RecordPage, MainPage, OngoingPage } from "./page"
 
 
 
@@ -11,7 +11,7 @@ function App() {
       <Route element={<LayoutPage />}>
         <Route path="/" element={<MainPage />} />
         <Route path="/record" element={<RecordPage />} />
-        <Route path="/setting" element={<SettingPage />} />
+        <Route path="/ongoing" element={<OngoingPage />} />
       </Route>
     </Routes>
   )
