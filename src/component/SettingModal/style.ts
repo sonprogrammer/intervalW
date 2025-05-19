@@ -11,6 +11,7 @@ export const StyledContainer = styled.div`
         flex
         items-center
         justify-center
+        
     `}
 `
 
@@ -24,5 +25,15 @@ export const StyledBox = styled.div`
         p-5
         rounded-lg
         w-[50%]
+        relative
+    `}
+`
+
+export const StyledCloseBtn = styled.div`
+    ${tw`
+        absolute
+        right-5
+        top-4
+        cursor-pointer
     `}
 `

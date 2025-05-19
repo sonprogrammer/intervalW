@@ -1,0 +1,1 @@
+export { default as TimerForSetting } from './TimerForSetting'
