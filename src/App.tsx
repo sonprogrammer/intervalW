@@ -13,6 +13,7 @@ function App() {
         <Route path="/record" element={<RecordPage />} />
         <Route path="/ongoing" element={<OngoingPage />} />
       </Route>
+      
     </Routes>
   )
 }

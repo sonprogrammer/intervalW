@@ -37,3 +37,41 @@ export const StyledCloseBtn = styled.div`
         cursor-pointer
     `}
 `
+
+export const StyledSetRoundBox = styled.div`
+    ${tw`
+        p-2
+        flex
+        flex-col
+        // gap-3
+    `}
+`
+
+export const StyledRoundList = styled.div`
+    ${tw`
+        flex justify-between rounded-md px-3
+        p-2
+        mt-2
+        `}
+`
+
+export const StyledAddBtn = styled.button`
+    ${tw`
+        mt-2
+        bg-blue-300
+        border-none
+        py-2
+        rounded-full
+    `}
+`
+
+export const StyledSaveBtn = styled.button`
+    ${tw`
+        bg-blue-500
+        border-none
+        p-3
+        rounded-md
+        mt-2
+        text-white
+    `}
+`
