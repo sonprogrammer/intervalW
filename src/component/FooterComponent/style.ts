@@ -13,7 +13,7 @@ export const StyledContainer = styled.div`
     `}
 `
 
-export const StyledMenus = styled(Link)`
+export const StyledMenus = styled(Link)<{isActive?: boolean}>`
     ${tw`
         flex-1
         text-center
@@ -22,7 +22,9 @@ export const StyledMenus = styled(Link)`
         no-underline
         py-4
     `}
+      background-color: ${({ isActive }) => isActive ? '#1d4ed8' : 'transparent'};
+
     &:hover{
-        background-color: black;
+        background-color: blue;
     }
 `

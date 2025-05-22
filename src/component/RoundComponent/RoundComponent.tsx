@@ -1,39 +1,42 @@
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material"
 import { TimerForSetting } from "../TimerForSetting"
 import { green, red, yellow } from "@mui/material/colors"
-import { useRoundStore } from "../../store/roundStore"
-import { useState } from "react"
+import { useRoundStore } from "../../store/useRoundStore"
+import { StyledBtns } from "./style"
 
 interface RoundComponentProps {
-    addRound: (data: {time: number, level:string}) => void
+    addRound: (data: {time: number, level:string, color: string}) => void
+    goBack: () => void
 }
-const RoundComponent = ({addRound}: RoundComponentProps) => {
-    const {selectedLevel, setSelectedLevel } = useRoundStore()
-    const [hours, setHours] = useState<number>(0)
-  const [minutes, setMinutes] = useState<number>(0)
-  const [seconds, setSeconds] = useState<number>(0)
+const RoundComponent = ({addRound, goBack}: RoundComponentProps) => {
+    const {
+        selectedLevel,
+        setSelectedLevel,
+        hours,
+        minutes,
+        seconds,
+        levelColor
+      } = useRoundStore();
+
+  
 
   const totalSeconds = hours * 3600 + minutes * 60 + seconds
 
     return (
         <div>
-            <TimerForSetting 
-                hours={hours}
-                minutes={minutes}
-                seconds={seconds}
-                onChangeHours={setHours}
-                onChangeMinutes={setMinutes}
-                onChangeSeconds={setSeconds}
-            />
+            <TimerForSetting />
             <div>
                 <FormControl>
-                    <FormLabel id="demo-controlled-radio-buttons-group">Gender</FormLabel>
+                    <FormLabel id="demo-controlled-radio-buttons-group" sx={{marginTop: 2}}>
+                        Level
+                    </FormLabel>
                     <RadioGroup
                         aria-labelledby="demo-controlled-radio-buttons-group"
                         name="controlled-radio-buttons-group"
                         value={selectedLevel}
                         onChange={(e)=> setSelectedLevel(e.target.value)}
                         row
+                        sx={{display:'flex', justifyContent:'center'}}
                     >
                         <FormControlLabel value="low"
                             control={
@@ -72,7 +75,14 @@ const RoundComponent = ({addRound}: RoundComponentProps) => {
                     </RadioGroup>
                 </FormControl>
             </div>
-            <button onClick={()=>addRound({time:totalSeconds, level:selectedLevel})}>완료</button>
+            <StyledBtns>
+                <button className="back" onClick={goBack}>뒤로가기</button>
+                <button 
+                    onClick={() => 
+                        addRound({time:totalSeconds, level:selectedLevel, color:levelColor[selectedLevel]})}>
+                완료
+                </button>
+            </StyledBtns>
         </div>
 
     )

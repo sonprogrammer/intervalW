@@ -1,22 +1,25 @@
 import { Box, FormControl, FormControlLabel, InputLabel, NativeSelect, Radio, RadioGroup } from "@mui/material"
-import { StyledAddBtn, StyledBox, StyledCloseBtn, StyledContainer, StyledRoundList, StyledSaveBtn, StyledSetRoundBox } from "./style"
+import { StyledAddBtn, StyledBox, StyledCloseBtn, StyledContainer, StyledRoundList, StyledSaveBtn, StyledSetRoundBox, StyledTimer } from "./style"
 import { useState } from "react"
 import { RoundComponent } from "../RoundComponent"
+import { TimerForSetting } from "../TimerForSetting"
 
 
+interface SettingModalProps {
+  closeModal: () => void
+}
 
-const SettingModal = () => {
-  // const [headerName, setHeaderName] = useState<string>('select type to save')
-  const [headerName, setHeaderName] = useState<string>('유산소')
+const SettingModal = ({closeModal}: SettingModalProps) => {
+  const [headerName, setHeaderName] = useState<string>('웨이트')
   const [roundModal, setRoundModal] = useState<boolean>(false)
 
-  const [roundList, setRoundList] = useState<{ time: number; level: string }[]>([])
+  const [roundList, setRoundList] = useState<{ time: number; level: string; color: string }[]>([])
 
   const formatedTime = (totalSeconds: number) => {
     const h = Math.floor(totalSeconds/3600)
     const m = Math.floor((totalSeconds%3600) / 60)
     const s = totalSeconds % 60
-    return `${h > 0 ? h + "시 " : ""}${m > 0 ? m + "분 " : ""}${s}초`
+    return `${h > 0 ? h + "H " : ""}${m > 0 ? m + "M " : ""}${s}sec`
 
   }
 
@@ -24,18 +27,23 @@ const SettingModal = () => {
     setHeaderName(event.target.value)
   }
 
-  const handleAddRound = (round: {time: number, level: string}) => {
+  const handleAddRound = (round: {time: number, level: string, color: string}) => {
     setRoundList(prev=> [...prev, round])
     setRoundModal(false)
   }
+  console.log('roundlist',roundList)
 
-  console.log('roundlist', roundList)
+  const handleBackToSetting = () => {
+    setRoundModal(false)
+  }
+
+
   return (
-    <StyledContainer className="me">
-      <StyledBox className="box">
+    <StyledContainer className="me" onClick={closeModal}>
+      <StyledBox className="box" onClick={(e) => e.stopPropagation()}>
 
-        {/* //*세팅하는 상단 부분 인풋이랑 헤더 */}
-        <StyledCloseBtn>
+        {/* //!세팅하는 상단 부분 인풋이랑 헤더 */}
+        <StyledCloseBtn onClick={closeModal}>
           X
         </StyledCloseBtn>
         <h1>{headerName}</h1>
@@ -44,6 +52,7 @@ const SettingModal = () => {
             aria-labelledby="demo-radio-buttons-group-label"
             name="type"
             onChange={handleChange}
+            value={headerName}
           >
             <FormControlLabel value="웨이트" control={<Radio />} label="웨이트" />
             <FormControlLabel value="유산소" control={<Radio />} label="유산소" />
@@ -52,7 +61,7 @@ const SettingModal = () => {
 
         {/* TODO 웨이트선택하면 시간설정만 가능 유산소는 목표라운드, 라운드 구성하면댐  */}
         {headerName === '유산소' ?
-          <div className="flex flex-col w-[50%]">
+          <div className="flex flex-col w-full">
 
             {/* //*목표라운드 */}
             <Box className='hi' >
@@ -68,7 +77,7 @@ const SettingModal = () => {
                   }}
                 >
                   {Array.from({ length: 10 }, (_, i) => (
-                    <option value={i + 1}>{i + 1}라운드</option>
+                    <option key={i} value={i + 1}>{i + 1}라운드</option>
                   ))}
                 </NativeSelect>
               </FormControl>
@@ -77,18 +86,18 @@ const SettingModal = () => {
             {/* //*라운드 구성 */}
             <StyledSetRoundBox className="border-2 ">
               <p>라운드 구성</p>
-              {!roundModal &&roundList.length > 0 && roundList.map(a => (
-                <StyledRoundList key={a.time} className="border-2">
+              {!roundModal &&roundList.length > 0 && roundList.map((a, i) => (
+                <StyledRoundList key={i} className="border-2" >
                   <p>
                     {formatedTime(a.time)}
                   </p>
-                  <p className="font-bold text-red-700 pl-10">{a.level}</p>
+                  <p style={{color: `${a.color}`, fontWeight: 'bold'}}>{a.level}</p>
                 </StyledRoundList>
               ))}
             {/* TODO 라운드 컴포넌트 추가 */}
             {roundModal &&
-              <div>
-                <RoundComponent addRound={handleAddRound} />
+              <div className="flex justify-center">
+                <RoundComponent addRound={handleAddRound} goBack={handleBackToSetting}/>
               </div>
             }
             {!roundModal && <StyledAddBtn onClick={() => setRoundModal(!roundModal)}>
@@ -96,16 +105,19 @@ const SettingModal = () => {
               </StyledAddBtn>}
               
             </StyledSetRoundBox>
+            {!roundModal &&
+              <StyledSaveBtn>save</StyledSaveBtn>
+            }
           </div>
           :
-          <div className="flex flex-col w-[50%]">
+          <StyledTimer className="flex flex-col border-2">
             {/* TODO 이거 클릭하면 시간 설정창 모달창 나오게 하기 */}
             <p>시간 설정</p>
-          </div>
+            <TimerForSetting />
+            <StyledSaveBtn>save</StyledSaveBtn>
+          </StyledTimer>
         }
-
-        {/* TODO이거 클릭시 라운드 횟수, 라운드 구성 로컬스토리지에 저장 */}
-        <StyledSaveBtn>save</StyledSaveBtn>
+        
 
       </StyledBox>
     </StyledContainer>

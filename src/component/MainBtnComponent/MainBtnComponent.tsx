@@ -1,21 +1,30 @@
 import { useState } from "react"
 import { StyledContainer, StyledStop, StyledType } from "./style"
 import NameModal from "./NameModal"
-import startStore from "../../store/start"
-import { Link } from "react-router-dom"
+import {  useNavigate } from "react-router-dom"
+import { useExerciseType } from "../../store/useExerciseType"
+import useStart from "../../store/useStart"
 
 
 const MainBtnComponent = () => {
   const [modal, setModal] = useState(false)
-  const { start, setStart } = startStore()
+  const { start, setStart } = useStart()
+  const { setType} = useExerciseType()
 
-  const handleStartClick = () => {
+  const navigate = useNavigate()
+
+  const handleStartClick = (select: string) => {
+    setType(select)
+    if(select === '유산소'){
+      navigate('/ongoing')
+    }
     setStart(true)
     setModal(false)
   }
 
   const handleStopClick = () => {
     setStart(false)
+    setType('운동')
   }
 
 
@@ -43,16 +52,14 @@ const MainBtnComponent = () => {
             <p>웨이트</p>
           </StyledType>
 
-          <StyledType onClick={handleStartClick}>
-            <Link to='/ongoing'>
+          <StyledType onClick={() => handleStartClick('유산소')}>
               <p>유산소</p>
-            </Link>
           </StyledType>
 
           {/* TODO 시작하려면 클릭하라고 설명적어놓기 */}
           {/* <StyledStart>Start</StyledStart> */}
 
-          {modal && <NameModal closeModal={handleCloseModal} startClick={handleStartClick}/>}
+          {modal && <NameModal closeModal={handleCloseModal} startClick={() => handleStartClick('웨이트')}/>}
         </>
       }
 

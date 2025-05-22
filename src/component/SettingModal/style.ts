@@ -26,7 +26,13 @@ export const StyledBox = styled.div`
         rounded-lg
         w-[50%]
         relative
+        min-h-[50%]
     `}
+    @media(max-width: 640px){
+        ${tw`
+            w-[80%]
+        `}
+    }
 `
 
 export const StyledCloseBtn = styled.div`
@@ -43,16 +49,25 @@ export const StyledSetRoundBox = styled.div`
         p-2
         flex
         flex-col
-        // gap-3
+        items-center
+        gap-1
+        max-h-[300px]
+        overflow-y-auto
     `}
+    
 `
 
 export const StyledRoundList = styled.div`
     ${tw`
-        flex justify-between rounded-md px-3
+        flex 
+        w-[80%]
+        justify-between 
+        rounded-md 
+        px-3
         p-2
-        mt-2
-        `}
+        bg-gray-300
+        border-gray-500
+    `}
 `
 
 export const StyledAddBtn = styled.button`
@@ -62,6 +77,21 @@ export const StyledAddBtn = styled.button`
         border-none
         py-2
         rounded-full
+        w-[50%]
+        cursor-pointer
+    `}
+    &:hover{
+        ${tw`
+            bg-blue-500
+            text-white
+        `}
+    }
+`
+
+export const StyledTimer = styled.div`
+    ${tw`
+        p-5
+        w-[80%]
     `}
 `
 
@@ -73,5 +103,12 @@ export const StyledSaveBtn = styled.button`
         rounded-md
         mt-2
         text-white
+        cursor-pointer
     `}
+    &:hover{
+        ${tw`
+            bg-blue-700
+        `}
+    }
 `
+

@@ -1,24 +1,19 @@
 import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { useRoundStore } from "../../store/useRoundStore";
 
 
 
-interface TimerForSettingProps {
-  hours: number;
-  minutes: number;
-  seconds: number;
-  onChangeHours: (h: number) => void;
-  onChangeMinutes: (m: number) => void;
-  onChangeSeconds: (s: number) => void;
-}
-const TimerForSetting = ({ hours, minutes, seconds, onChangeHours, onChangeMinutes, onChangeSeconds }: TimerForSettingProps) => {
- 
+
+const TimerForSetting = () => {
+  const { hours, minutes, seconds, setHours, setMinutes, setSeconds } = useRoundStore();
+
     return (
-      <Box display="flex" gap={2}>
+      <Box display="flex" gap={2} sx={{justifyContent:'center'}}>
         <FormControl>
           <InputLabel>시</InputLabel>
           <Select value={hours} 
               label="시" 
-              onChange={(e) => onChangeHours(Number(e.target.value))}
+              onChange={(e) => setHours(Number(e.target.value))}
               MenuProps={{
                   PaperProps: {
                       style:{
@@ -38,7 +33,7 @@ const TimerForSetting = ({ hours, minutes, seconds, onChangeHours, onChangeMinut
           <InputLabel>분</InputLabel>
           <Select value={minutes}
                   label="분" 
-                  onChange={(e) => onChangeMinutes(Number(e.target.value))}
+                  onChange={(e) => setMinutes(Number(e.target.value))}
                   MenuProps={{
                       PaperProps: {
                           style:{
@@ -58,7 +53,7 @@ const TimerForSetting = ({ hours, minutes, seconds, onChangeHours, onChangeMinut
           <InputLabel>초</InputLabel>
           <Select value={seconds} 
                   label="초" 
-                  onChange={(e) => onChangeSeconds(Number(e.target.value))}
+                  onChange={(e) => setSeconds(Number(e.target.value))}
                   MenuProps={{
                       PaperProps: {
                           style:{
