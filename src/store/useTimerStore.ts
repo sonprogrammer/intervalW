@@ -1,28 +1,36 @@
 import { create } from "zustand";
 
-interface Time {
-    hours: number;
-    minutes: number;
-    seconds: number;
+
+
+interface TimerState {
+    seconds: number
+    startTimer: () => void
+    stopTimer: () => void
+    resetTimer: () => void
 }
 
-interface TimerStore {
-    time: Time;
-    setTime: (key: keyof Time, value: number) => void
-    resetTime: () => void
-}
 
-export const useTimerStore = create<TimerStore>((set) => ({
-    time: {hours: 0, minutes: 0, seconds: 0},
-    setTime: (key, value) => 
-        set((state) => ({
-            time: {
-                ...state.time,
-                [key]: value
-            }
-        })),
-        resetTime: () => 
-            set(() => ({
-                time: {hours:0, minutes: 0, seconds: 0}
-            }))
+let interval: NodeJS.Timeout | null = null
+
+export const useTimerStore = create<TimerState>((set, get) => ({
+    seconds: 0,
+    startTimer: () => {
+        if(interval) return
+        interval = setInterval(() => {
+            set(state => ({seconds: state.seconds + 1}))
+        }, 1000)
+    },
+    stopTimer: () => {
+        if(interval){
+            clearInterval(interval)
+            interval = null
+        }
+    },
+    resetTimer: () => {
+        if(interval){
+            clearInterval(interval)
+            interval = null
+        }
+        set({seconds: 0})
+    }
 }))

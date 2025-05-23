@@ -4,12 +4,14 @@ import NameModal from "./NameModal"
 import {  useNavigate } from "react-router-dom"
 import { useExerciseType } from "../../store/useExerciseType"
 import useStart from "../../store/useStart"
+import { useTimerStore } from "../../store/useTimerStore"
 
 
 const MainBtnComponent = () => {
   const [modal, setModal] = useState(false)
   const { start, setStart } = useStart()
   const { setType} = useExerciseType()
+  const { startTimer, stopTimer} = useTimerStore()
 
   const navigate = useNavigate()
 
@@ -20,11 +22,13 @@ const MainBtnComponent = () => {
     }
     setStart(true)
     setModal(false)
+    startTimer()
   }
 
   const handleStopClick = () => {
     setStart(false)
     setType('운동')
+    stopTimer()
   }
 
 

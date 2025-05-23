@@ -77,3 +77,17 @@ export const StyledLevel = styled.div`
         text-white
     `}
 `
+
+export const StyledRemainTime = styled.div`
+    ${tw`
+        flex
+        flex-col
+        items-center
+        bg-gray-300
+        w-full
+        p-4
+        rounded-2xl
+        text-xl
+
+    `}
+`
